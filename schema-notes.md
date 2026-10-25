@@ -1000,3 +1000,18 @@ same observation appears three times, or Jim corrects the same thing twice.
   entry exists here even though the actual claims work stays entirely in earnings-kb. If this
   recurs (a new earnings file appears before earnings-kb has run on it), the same close-the-loop
   step should repeat rather than re-litigating scope each time.
+- 2026-10-25 - **First ingest on the GitHub index of record (repo `jbreuckm-del/signal-kb-index`,
+  commit a81008e).** Visser 2026-10-24 (deleveraging) went through end to end: 23 claims,
+  pred-156..158, Mode 8 run, manifest 11/11 COMPLETE. Dated ledger copy
+  `predictions_2026-10-25.csv` was published to Drive `_index` and verified by download plus
+  byte-compare (78,018 bytes, sha256 prefix ea49045fa2408115). Two operating notes:
+  (1) **Caption format.** This transcript's lines start with a timestamp glued to the first
+  word (e.g. "26 secondsdeleveraging"). Verbatim quotes must sit inside one segment and skip
+  that first fused word, or quote checks fail. Check new YouTube-caption exports for this
+  pattern before drafting quotes.
+  (2) **Ledger publish cost.** The Drive connector only takes file content inline, so each
+  dated ledger publish pushes the whole file (~78KB now) through the conversation. That is
+  fine for a manual ingest but expensive for a weekly scheduled run, and it grows with the
+  ledger. If it becomes a problem, publish only when predictions.csv changed in that run (the
+  weekly task already does nothing when nothing is ingested). Revisit if the ledger passes
+  ~150KB.
