@@ -1076,3 +1076,13 @@ same observation appears three times, or Jim corrects the same thing twice.
   show-level labels where a line changed speaker mid-passage. Weaker than an explicit introduction;
   the 2026-08-27 panel rule still governs ambiguous turns. 8 pending predictions are already past
   horizon (mostly September FOMC calls) and are ready for Mode 3.
+- 2026-11-08 - **Repo of record was behind the published ledger.** Scoring of pred-097 (wrong,
+  2026-10-29) and pred-129 (wrong, 2026-11-05, Anthropic amended S-1) reached Drive as
+  `predictions_2026-11-05.csv` / `_r2.csv` but was never committed here - the opposite of the Layout
+  rule ("the repo is the index of record ... commits and pushes before it reports"). Found only
+  because today's publish diffed the repo against the newest Drive copy first. Reconciled from `_r2`
+  (the later publish; the first copy also carried a pred-158 note edit that `_r2` reverted, so it was
+  not carried). **Rule worth adopting: before publishing a dated ledger, diff the repo
+  predictions.csv against the newest dated Drive copy; any row that differs is an uncommitted
+  scoring, not noise.** Whether Jim confirmed those two scorings per Mode 3 is not recorded in either
+  file - flagged to him.
