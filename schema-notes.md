@@ -1015,3 +1015,64 @@ same observation appears three times, or Jim corrects the same thing twice.
   ledger. If it becomes a problem, publish only when predictions.csv changed in that run (the
   weekly task already does nothing when nothing is ingested). Revisit if the ledger passes
   ~150KB.
+- 2026-11-08 - **Backlog ingest: 47 sources extracted (46 claims-lane + 1 later re-filed skipped), 13
+  skipped, 702 claims, 116 predictions (pred-159..274), 2 practices (prac-025/026). Manifest 11/11.**
+  **The Claude index had been dormant since 2026-09-02** apart from the single Visser 10-24 run: 60
+  files on Drive were not in `ingested.txt` while the ChatGPT side kept processing (its RUN-0022 on
+  this date covered MI-0121..0135). Nothing alerts on this gap - it was found only because Jim asked
+  whether "the ingestion" had happened. **Candidate fix (first occurrence, not proposing yet):** a
+  standing check, e.g. the weekly Claude task reporting `count(Drive files not in ingested.txt)` so
+  a backlog is visible within a week rather than ten. Run chronologically, oldest first, because
+  novelty is graded against what is already indexed: ingesting the November batch alone would have
+  graded repeated ideas `novel`.
+- 2026-11-08 - **Process at this volume.** Extraction by 8 parallel subagents to a written brief
+  (`check_extract.py`: schema, verbatim-normalized quotes, single speaker_interest per speaker, no
+  novelty fields); novelty by 6 separate blind subagents over a 977-row date-sorted digest plus the
+  run's own earlier claims (verified: every cited id exists and predates). **Novelty: 162 novel (23%)
+  / 343 developing / 122 recycled / 52 consensus / 23 contested** - consistent with the 2026-08-28
+  observation that blind grading lands far below drafted grades. Quotes 704/704 verbatim on the
+  first checked pass because the extraction checker used the Mode 4 normalizer at draft time.
+- 2026-11-08 - **Mode 8 at volume: 329 figure-bearing non-forecast claims; 149 agrees / 29 conflicts
+  / 79 no-second-source / 71 n/a / 1 extraction-fixed.** Conflicts recorded in
+  `verified_against`/`verification_note`, all left standing. Notable: Eisman's OpenAI "$12.3B costs"
+  is the operating loss (eis3-05); Visser's "~50bp 10-year range for four years" is 150bp+ (pomp-01);
+  Huang's Vera Rubin "$50B/GW" vs his own $40B on the Q2 FY27 call (bgh-18); Wood's "99.99%/yr
+  inference cost decline" (ark1-09). **Two new failure modes:** (1) **the session-wide web-search
+  budget (~200) ran out** across six parallel checkers, so roughly 20 checkable figures were left
+  `no-second-source` without a search - Mode 8 at this volume needs batching across sessions or a
+  smaller figure filter; (2) **a checker computed a "conflict" from a recalled base figure**
+  (tig-15, FY25 Intuit revenue not fetched) - re-labelled `unexplained` with the recall stated.
+  Rule worth carrying: a Mode 8 verdict may not rest on a recalled number. **acc-12 was our error,
+  not the speaker's** ("different figure than assumed"): the extractor turned Levchin's example of a
+  long loan (3.5 years) into a maximum; claim text corrected, no conflict recorded.
+- 2026-11-08 - **Capture-route rule applied: `MI-0101_ARK_Investor_Letter_..._Full_Text_Extraction.txt`
+  skipped.** Its own header says "search-rendered extraction, not raw HTML" (ChatGPT capture) - a
+  rendering, which the Capture section forbids as a quote source. Recapture via Chrome
+  `get_page_text` if the letter is wanted. Also skipped: **Apollo "Daily Spark" file is a feed-moved
+  notice and stale index page** - the `feeds.txt` entry is dead (Daily Spark moved to apollo.com);
+  Thompson "Presented by Stripe" (sponsorship/ethics announcement); CRDO earnings (earnings-kb
+  owns); Timmer 2026-09-09 "Impact" (personal Burning Man post, zero claims - re-filed `skipped`).
+- 2026-11-08 - **Capture tool change: `Get-Transcripts.ps1` v3.** YouTube began 429-ing caption
+  (timedtext) requests in late Oct 2026; v2 failed every URL for over a week. v3 fetches metadata
+  once, requests exactly ONE caption track (creator captions, else `en-orig`), and on a 429 falls back
+  to audio + local whisper.cpp transcription. **`SOURCE:` lines now distinguish
+  `auto-captions (yt-dlp, en-orig)` / `creator captions` / `local transcription (whisper.cpp ...)`**.
+  A whisper transcript is a different rendering than captions (no `>>` markers, different word
+  choices) - quotes verify against whichever file was ingested, so Mode 4 is unaffected, but a
+  re-captured episode will NOT match an earlier caption file word for word.
+- 2026-11-08 - **Filename dedupe missed a re-captured episode.** Visser's "AI Bubble Burst..." was
+  captured 2026-10-24 and again today as "...- 2026-10-25.txt" (the upload date in yt-dlp metadata
+  shifted by a day; title capitalisation also differs). ChatGPT caught it by content (MI-0110 alt);
+  here it was caught by hand and added to `ingested.txt` only. Filename dedupe is fragile to both;
+  the stable key is the YouTube video id in the `URL:` header. Second-order: first occurrence.
+- 2026-11-08 - **Recording date vs publication date - second occurrence** (first: Griffin 2026-09-02).
+  Yardeni recorded 09-14, published 09-18, and predicted the 09-16 FOMC: pred-211's horizon precedes
+  its `date_made`. Pies (rec. 11-03, pub. 11-04) and Eisman (rec. 11-05, pub. 11-06) have the same
+  gap around the election. The schema has no `recorded_date`; claims carry the publication date. One
+  more occurrence meets the Mode 5 bar for proposing the field.
+- 2026-11-08 - **Unlabeled multi-speaker audio, attribution by content.** Pompliano 09-05/09-12 and
+  Pal 09-10/09-17 have no speaker labels; extractors split turns by self-references (Visser's
+  Substack/Williamsburg, Pal's GMI/Real Vision, Galvin's fund) and skipped ambiguous turns, using
+  show-level labels where a line changed speaker mid-passage. Weaker than an explicit introduction;
+  the 2026-08-27 panel rule still governs ambiguous turns. 8 pending predictions are already past
+  horizon (mostly September FOMC calls) and are ready for Mode 3.
