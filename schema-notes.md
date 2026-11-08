@@ -1086,3 +1086,12 @@ same observation appears three times, or Jim corrects the same thing twice.
   predictions.csv against the newest dated Drive copy; any row that differs is an uncommitted
   scoring, not noise.** Whether Jim confirmed those two scorings per Mode 3 is not recorded in either
   file - flagged to him.
+- 2026-11-08 - **Ledger now published via the device bridge, not the Drive connector - and the
+  bridge has its own stale-copy hazard.** Writing the dated copy into the Drive-synced `_index`
+  folder (`device_commit_files`) avoids pushing ~125KB inline through the conversation (the cost
+  noted 2026-10-25). But the first commit delivered a STALE snapshot (124,432 bytes, from an earlier
+  write of the same output filename) instead of the current 125,440-byte file. Caught only by
+  re-staging the device copy and `cmp`-ing it to the repo. Fix: publish from a fresh, never-before-
+  used output filename, then verify device bytes AND the Drive connector's `fileSize` against the
+  committed file. Published `predictions_2026-11-08.csv`, 125,440 bytes, sha256 prefix
+  39e69197824669b9, byte-identical to commit 4ddbb75.
