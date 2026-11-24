@@ -1126,3 +1126,13 @@ same observation appears three times, or Jim corrects the same thing twice.
   free weekly articles were extractable. SemiAnalysis removed for the same reason.
   (9) Open scoring candidate, NOT scored: Damodaran 2026-11-19 "Huang unlikely to be reinstated"
   against the 2026-11-23 reinstatement 8-K. Needs Jim's confirmation per Mode 3.
+- 2026-11-24 - **Cost review after Jim flagged usage. Prior-digest pre-filtering does NOT work.**
+  Tested against this run's 271 real prior citations: entity-overlap filtering kept only 62% of
+  them even with no frequency cap; a TF-IDF top-100-per-claim shortlist kept 74% while still
+  including ~1,400 of 1,521 rows; a full-text-recent / short-text-older tiered digest saved only
+  7-22% of bytes. 83% of citations pointed at claims from 2026-08 onward but the rest were spread
+  back to 2025-09. The digest (462KB) is nearly all of a grader's cost (G1 257k, G2 295k tokens;
+  Mode 8 M1 194k, M2 218k). Levers that hold: one grader reading the digest once, cheaper model
+  for subagents, Mode 8 triage (29 of 83 dispatched claims returned n/a or no-second-source;
+  historical-analogy claims 0 of 5 useful), and a thin orchestrator. Proposed to Jim as a SKILL.md
+  change the same day.
