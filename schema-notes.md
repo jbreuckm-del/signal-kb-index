@@ -1095,3 +1095,34 @@ same observation appears three times, or Jim corrects the same thing twice.
   used output filename, then verify device bytes AND the Drive connector's `fileSize` against the
   committed file. Published `predictions_2026-11-08.csv`, 125,440 bytes, sha256 prefix
   39e69197824669b9, byte-identical to commit 4ddbb75.
+- 2026-11-24 - **First ingest of the written-source feeds: 32 files, 30 claim sources, 132 claims,
+  30 predictions (pred-276 to pred-305), 0 practices.** New speakers: Damodaran, Hayes, Hougan
+  (Bitwise), Alden, Slok, four Epoch AI authors. Two Stratechery weekly roundups logged `skipped`.
+  Novelty by two blind subagents: 97 developing, 17 novel, 11 consensus, 7 recycled. Mode 8 by two
+  subagents on 83 figure-bearing claims: 33 agrees, 21 conflicts, 11 no-second-source, 18 n/a.
+  Notes for later runs:
+  (1) **Written sources carry far more checkable figures than podcasts, and Mode 8 earned its keep:**
+  21 conflicts, mostly Damodaran figures against the Anthropic S-1/424(b)(4) (compute commitments,
+  share count, proceeds, an "operating loss" that is net loss less one charge) and Slok/Timmer
+  chart figures against FactSet/BEA/closing prices. Counts toward the retirement test as a run that
+  DID surface what the primary pass missed.
+  (2) **Repo ledger was behind Drive again (third occurrence):** pred-209 was scored on the
+  2026-11-19 Drive copy and never committed. Reconciled in 9a713e1 before ingest. Third strike on
+  the same pattern - a SKILL.md change (diff repo vs newest dated Drive copy as Mode 1 step 0) is
+  now proposable to Jim.
+  (3) **Folder diff was partial:** only the first 100 folder entries plus files created since
+  2026-11-01 were compared with ingested.txt. Older pages assumed ingested.
+  (4) **A feed can die silently:** the Timmer LinkedIn bridge and the Apollo feed had been dead for
+  weeks; found only because Jim asked about sources. Get-Written v2 now prints a red
+  "SOURCE RETURNED NOTHING"; the ingest itself has no equivalent "expected source absent" check.
+  (5) **Grader context limit:** one novelty subagent read the last ~540 digest rows truncated to
+  150-210 chars. At ~1,650 claims the full digest no longer fits one grader comfortably; split by
+  domain or pre-filter by entity next time.
+  (6) **Digest dates of the form `<=2026-05-05`** (first Huang batch) make graders avoid citing
+  those ids. Not fixed.
+  (7) Density ran above the 1.3-1.7 per 1k words guide for the short Slok and Hougan notes. Accepted:
+  each note is one figure-bearing claim.
+  (8) Paid Stratechery dailies arrive as public previews (flagged TOO SHORT by the scan); only the
+  free weekly articles were extractable. SemiAnalysis removed for the same reason.
+  (9) Open scoring candidate, NOT scored: Damodaran 2026-11-19 "Huang unlikely to be reinstated"
+  against the 2026-11-23 reinstatement 8-K. Needs Jim's confirmation per Mode 3.
