@@ -1136,3 +1136,26 @@ same observation appears three times, or Jim corrects the same thing twice.
   for subagents, Mode 8 triage (29 of 83 dispatched claims returned n/a or no-second-source;
   historical-analogy claims 0 of 5 useful), and a thin orchestrator. Proposed to Jim as a SKILL.md
   change the same day.
+- 2026-11-26 - **Repo ledger was behind Drive again (fourth occurrence).** The scheduled weekly review
+  scored pred-279 correct (intraday lows below Damodaran's ~$76) and published
+  `predictions_2026-11-26.csv` without committing. Synced byte-exact at Jim's instruction (f40068c,
+  sha256 6e11da2b...); only pred-279 differed. The diff-before-publish rule proposed after the third
+  strike is still not in SKILL.md; the weekly review is the writer that keeps skipping the commit.
+- 2026-11-26 - **First earnings release ingested into signal-kb, and first non-slug source_id.**
+  NVIDIA Q3 FY27 release logged as `EXT-20261117-01` (Jim's id, matching Chat's EXT register) so
+  Chat candidate XP-20261117-01 could become pred-306; the XP id sits in `external_ids`, which
+  LEDGER_README reserves for Chat P ids - extended here to XP ids. Scope held to ONE claim (nvq3-01,
+  the Q4 guide): the release's reported figures belong to earnings-kb under the pointer contract,
+  and earlier earnings sources were logged `skipped`. Mode 4 has no source_id format check, so the
+  uppercase id passes; nothing else in the schema depends on the slug form.
+- 2026-11-26 - **Capture caveat: the get_page_text route has no byte-level path to disk.** The page
+  text came back as tool output and was written to the source file by the session, so the staged
+  file is a transcription of the capture, not the capture itself. Checks applied: every income,
+  nine-month and segment identity in the file ties, and Mode 8 found the outlook sentence identical
+  in a second rendering. First occurrence; a scripted fetch to file would remove the step.
+- 2026-11-26 - **Novelty grader graded by grep, not a full digest read** (one claim; it said so).
+  Cited huang2-01 and pred-153, both verified to exist and predate. Deviation from "never truncate
+  the digest" recorded rather than re-run: one company-guidance claim, NVDA-scoped. Mode 8 on the
+  same claim: agrees (TechPowerUp republication; 8-K Ex. 99.1 and CFO commentary not reached) and
+  surfaced the base rate that matters: Q3 FY27 beat the top of its $108.0bn +/-2% guide by 5.2%,
+  so pred-306's two-sided test scores an equal Q4 beat WRONG.
